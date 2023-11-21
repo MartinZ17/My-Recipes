@@ -16,11 +16,11 @@
         [MinLength(100)]
         public string Instructions { get; set; }
 
-        [Range(0, 24 * 60)] // one day
+        [Range(0, 24 * 60)] // One day
         [Display(Name="Preparation time (in minutes)")]
         public int PreparationTime { get; set; }
 
-        [Range(0, 24 * 60)] // one day
+        [Range(0, 24 * 60)] // One day
         [Display(Name = "Cooking time (in minutes)")]
         public int CookingTime { get; set; }
 
