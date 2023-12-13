@@ -9,6 +9,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using MoiteRecepti.Services;
     using MyRecipes.Data;
     using MyRecipes.Data.Common;
     using MyRecipes.Data.Common.Repositories;
@@ -66,11 +67,10 @@
             services.AddTransient<IGetCountsService, GetCountService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IRecipesService, RecipesService>();
+            services.AddTransient<IGotvachBgScraperService, GotvachBgScraperService>();
+        }
 
-
-		}
-
-		private static void Configure(WebApplication app)
+        private static void Configure(WebApplication app)
         {
             // Seed data on application startup
             using (var serviceScope = app.Services.CreateScope())

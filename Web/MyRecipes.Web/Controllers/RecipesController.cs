@@ -3,18 +3,19 @@
     using Microsoft.AspNetCore.Mvc;
     using MyRecipes.Services.Data;
     using MyRecipes.Web.ViewModels.Recipes;
+
 	using System.Threading.Tasks;
 
-	public class RecipesController : Controller
+    public class RecipesController : Controller
     {
         private readonly ICategoriesService categoriesService;
-		private readonly IRecipesService recipesService;
+        private readonly IRecipesService recipesService;
 
-		public RecipesController(ICategoriesService categoriesService, IRecipesService recipesService)
+        public RecipesController(ICategoriesService categoriesService, IRecipesService recipesService)
         {
             this.categoriesService = categoriesService;
-			this.recipesService = recipesService;
-		}
+            this.recipesService = recipesService;
+        }
 
         public IActionResult Create()
         {
@@ -34,8 +35,8 @@
 
             await this.recipesService.CreateAsync(input);
 
-			// TODO: Redirect to recipe info page
-			return this.Redirect("/");
+            // TODO: Redirect to recipe info page
+            return this.Redirect("/");
         }
     }
 }

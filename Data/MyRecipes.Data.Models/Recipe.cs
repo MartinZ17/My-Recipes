@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     using MyRecipes.Data.Common.Models;
 
@@ -22,6 +23,8 @@
         public TimeSpan CookingTime { get; set; }
 
         public int PortionCount { get; set; }
+
+        public string OriginalUrl { get; set; }
 
         public string AddedByUserId { get; set; }
 
