@@ -1,11 +1,12 @@
 ﻿namespace MyRecipes.Web.ViewModels.Recipes
 {
+    using System;
     using System.Collections.Generic;
 
-    public class RecipesListViewModel
+    using MyRecipes.Web.ViewModels;
+
+    public class RecipesListViewModel : PagingViewModel
     {
         public IEnumerable<RecipeInListViewModel> Recipes { get; set; }
-
-        public int PageNumber { get; set; }
     }
 }
