@@ -1,5 +1,6 @@
 ﻿namespace MyRecipes.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -15,7 +16,10 @@
         private readonly IRecipesService recipesService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public RecipesController(ICategoriesService categoriesService, IRecipesService recipesService, UserManager<ApplicationUser> userManager)
+        public RecipesController(
+            ICategoriesService categoriesService,
+            IRecipesService recipesService,
+            UserManager<ApplicationUser> userManager)
         {
             this.categoriesService = categoriesService;
             this.recipesService = recipesService;
@@ -41,7 +45,17 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            await this.recipesService.CreateAsync(input, user.Id);
+            try
+            {
+                // await this.recipesService.CreateAsync(input, user.Id, $"{this.env.Environment.ContentRootPath}/images");
+                await this.recipesService.CreateAsync(input, user.Id, $"wwwroot/images");
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                return this.View(input);
+            }
 
             // TODO: Redirect to recipe info page
             return this.Redirect("/");

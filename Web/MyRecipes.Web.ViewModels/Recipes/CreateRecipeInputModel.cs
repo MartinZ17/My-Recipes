@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using MyRecipes.Data.Models;
+    using Microsoft.AspNetCore.Http;
 
     public class CreateRecipeInputModel
     {
@@ -20,7 +20,7 @@
         [Display(Name="Preparation time (in minutes)")]
         public int PreparationTime { get; set; }
 
-        [Range(0, 24 * 60)] // One day
+        [Range(0, 24 * 60)] // The same
         [Display(Name = "Cooking time (in minutes)")]
         public int CookingTime { get; set; }
 
@@ -30,6 +30,8 @@
 
         [Required]
         public int CategoryId { get; set; }
+
+        public IEnumerable<IFormFile> Images { get; set; }
 
         public IEnumerable<RecipeIngredientInputModel> Ingredients { get; set; }
 

@@ -54,5 +54,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Administration\Views\Dashboard\" />
+    <Folder Include="wwwroot\images\recipes\" />
   </ItemGroup>
 </Project>

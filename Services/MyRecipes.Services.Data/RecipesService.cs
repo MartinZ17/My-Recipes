@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@
             this.ingredientsRepository = ingredientsRepository;
         }
 
-        public async Task CreateAsync(CreateRecipeInputModel input, string userId)
+        public async Task CreateAsync(CreateRecipeInputModel input, string userId, string imagePath)
         {
             var recipe = new Recipe()
             {
@@ -49,6 +50,31 @@
                     Ingrediant = ingredient,
                     Quantity = inputIngredient.Quantity,
                 });
+            }
+
+            var allowedExtensions = new[] { "jpg", "png", "gif" };
+
+            foreach (var image in input.Images)
+            {
+                var extension = Path.GetExtension(image.FileName).TrimStart('.');
+                if (!allowedExtensions.Any(x => extension.EndsWith(x)))
+                {
+                    throw new Exception($"Invalid image extension {extension}!");
+                }
+
+                var dbImage = new Image
+                {
+                    AddedByUserId = userId,
+                    Recipe = recipe,
+                    Extension = extension,
+                };
+                recipe.Images.Add(dbImage);
+
+                var physicalPath = $"wwwroot/images/recipes/{dbImage.Id}.{dbImage.Extension}";
+                using (Stream fileStream = new FileStream(physicalPath, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
+                }
             }
 
             await this.recipesRepository.AddAsync(recipe);

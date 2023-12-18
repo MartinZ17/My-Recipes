@@ -1,9 +1,10 @@
 ﻿namespace MyRecipes.Data.Seeding
 {
-    using MyRecipes.Data.Models;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using MyRecipes.Data.Models;
 
     public class CategoriesSeeder : ISeeder
     {

@@ -1,6 +1,7 @@
 ﻿namespace MyRecipes.Services.Data
 {
     using System;
+
     using MyRecipes.Services.Data.Models;
 
     public interface IGetCountsService
