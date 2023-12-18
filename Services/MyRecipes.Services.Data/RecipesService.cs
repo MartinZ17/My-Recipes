@@ -1,6 +1,7 @@
 ﻿namespace MyRecipes.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@
             this.ingredientsRepository = ingredientsRepository;
         }
 
-        public async Task CreateAsync(CreateRecipeInputModel input)
+        public async Task CreateAsync(CreateRecipeInputModel input, string userId)
         {
             var recipe = new Recipe()
             {
@@ -31,6 +32,7 @@
                 Name = input.Name,
                 PortionCount = input.PortionCount,
                 PreparationTime = TimeSpan.FromMinutes(input.PreparationTime),
+                AddedByUserId = userId,
             };
 
             foreach (var inputIngredient in input.Ingredients)
@@ -50,6 +52,27 @@
 
             await this.recipesRepository.AddAsync(recipe);
             await this.recipesRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<RecipeInListViewModel> GetAll(int page, int itemsPerPage = 12)
+        {
+            var recipes = this.recipesRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Select(x => new RecipeInListViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    CategoryName = x.Category.Name,
+                    CategoryId = x.CategoryId,
+                    ImageUrl =
+                        x.Images.FirstOrDefault().RemoteImageUrl != null ?
+                        x.Images.FirstOrDefault().RemoteImageUrl :
+                        "/images/recipes" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
+                }).ToList();
+
+            return recipes;
         }
     }
 }

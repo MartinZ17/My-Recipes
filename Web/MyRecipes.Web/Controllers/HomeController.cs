@@ -18,7 +18,6 @@
     {
         public IGetCountsService CountsService { get; }
 
-
         public HomeController(IGetCountsService countsService)
         {
             this.CountsService = countsService;

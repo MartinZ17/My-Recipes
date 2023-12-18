@@ -9,9 +9,9 @@
     using AngleSharp;
     using MyRecipes.Data.Common.Repositories;
     using MyRecipes.Data.Models;
-	using MyRecipes.Services.Models;
+    using MyRecipes.Services.Models;
 
-	public class GotvachBgScraperService : IGotvachBgScraperService
+    public class GotvachBgScraperService : IGotvachBgScraperService
     {
         private const string BaseUrl = "https://recepti.gotvach.bg/r-{0}";
 
@@ -144,7 +144,7 @@
             var recipe = new RecipeDto();
 
             var recipeNameCategory = document
-                .QuerySelectorAll("#recEntity > div.breadcrumb")
+                .QuerySelectorAll("#recEntity > div.brdc")
                 .Select(x => x.TextContent)
                 .FirstOrDefault()
                 .Split(" »", StringSplitOptions.RemoveEmptyEntries)

@@ -1,14 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace MyRecipes.Web.Controllers
+﻿namespace MyRecipes.Web.Controllers
 {
-    public class GetRecipesController : Controller
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using MoiteRecepti.Services;
+
+    public class GetRecipesController : BaseController
     {
-        public GetRecipesController() { }
+        private readonly IGotvachBgScraperService gotvachBgScraperService;
+
+        public GetRecipesController(IGotvachBgScraperService gotvachBgScraperService)
+        {
+            this.gotvachBgScraperService = gotvachBgScraperService;
+        }
+
         public IActionResult Index()
         {
-            
-            return View();
+            return this.View();
+        }
+
+        public async Task<IActionResult> Add()
+        {
+            await this.gotvachBgScraperService.ImportRecipesAsync();
+            return this.View("Index", "Home");
         }
     }
 }
