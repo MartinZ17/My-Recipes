@@ -68,6 +68,7 @@
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IRecipesService, RecipesService>();
             services.AddTransient<IGotvachBgScraperService, GotvachBgScraperService>();
+            services.AddTransient<IVotesService, VotesService>();
         }
 
         private static void Configure(WebApplication app)

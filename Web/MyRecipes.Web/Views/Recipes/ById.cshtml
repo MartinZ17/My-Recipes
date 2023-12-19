@@ -19,11 +19,11 @@
 				</li>
 				<li class="single-meta">
 					<ul class="item-rating">
-						<li class="star-fill"><i class="fas fa-star"></i></li>
-						<li class="star-fill"><i class="fas fa-star"></i></li>
-						<li class="star-fill"><i class="fas fa-star"></i></li>
-						<li class="star-fill"><i class="fas fa-star"></i></li>
-						<li class="star-empty"><i class="fas fa-star"></i></li>
+						<li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
+						<li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
+						<li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
+						<li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
+						<li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
 						<li><span>4/5<span> / 5</span></span> </li>
 					</ul>
 				</li>
@@ -121,3 +121,13 @@
 		</div>
 	</div>
 </div>
+
+@section Scripts {
+	<script>
+		$("li[data-vote]").each(function (el) {
+			$(this).on("click", function () {
+				console.log($(this));
+			})
+		});
+	</script>
+}
