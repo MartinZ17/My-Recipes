@@ -8,9 +8,9 @@
 
         public virtual Recipe Recipe { get; set; }
 
-        public int IngrediantId { get; set; }
+        public int IngredientId { get; set; }
 
-        public virtual Ingredient Ingrediant { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
 
         public string Quantity { get; set; }
     }

@@ -47,7 +47,7 @@
 
                 recipe.Ingredients.Add(new RecipeIngredient
                 {
-                    Ingrediant = ingredient,
+                    Ingredient = ingredient,
                     Quantity = inputIngredient.Quantity,
                 });
             }
@@ -90,6 +90,14 @@
                 .To<T>()
                 .ToList();
             return recipes;
+        }
+
+        public T GetById<T>(int id)
+        {
+           var recipe = this.recipesRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+           return recipe;
         }
 
         public int GetCount()

@@ -12,8 +12,8 @@ using MyRecipes.Data;
 namespace MyRecipes.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231218094117_Update")]
-    partial class Update
+    [Migration("20231219115816_RenameIngredient")]
+    partial class RenameIngredient
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -406,7 +406,7 @@ namespace MyRecipes.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IngrediantId")
+                    b.Property<int>("IngredientId")
                         .HasColumnType("int");
 
                     b.Property<string>("Quantity")
@@ -511,9 +511,9 @@ namespace MyRecipes.Data.Migrations
 
             modelBuilder.Entity("MyRecipes.Data.Models.RecipeIngredient", b =>
                 {
-                    b.HasOne("MyRecipes.Data.Models.Ingredient", "Ingrediant")
+                    b.HasOne("MyRecipes.Data.Models.Ingredient", "Ingredient")
                         .WithMany("Recipes")
-                        .HasForeignKey("IngrediantId")
+                        .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -523,7 +523,7 @@ namespace MyRecipes.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Ingrediant");
+                    b.Navigation("Ingredient");
 
                     b.Navigation("Recipe");
                 });

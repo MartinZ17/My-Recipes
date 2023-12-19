@@ -403,7 +403,7 @@ namespace MyRecipes.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IngrediantId")
+                    b.Property<int>("IngredientId")
                         .HasColumnType("int");
 
                     b.Property<string>("Quantity")
@@ -414,7 +414,7 @@ namespace MyRecipes.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IngrediantId");
+                    b.HasIndex("IngredientId");
 
                     b.HasIndex("RecipeId");
 
@@ -508,9 +508,9 @@ namespace MyRecipes.Data.Migrations
 
             modelBuilder.Entity("MyRecipes.Data.Models.RecipeIngredient", b =>
                 {
-                    b.HasOne("MyRecipes.Data.Models.Ingredient", "Ingrediant")
+                    b.HasOne("MyRecipes.Data.Models.Ingredient", "Ingredient")
                         .WithMany("Recipes")
-                        .HasForeignKey("IngrediantId")
+                        .HasForeignKey("IngredientId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -520,7 +520,7 @@ namespace MyRecipes.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Ingrediant");
+                    b.Navigation("Ingredient");
 
                     b.Navigation("Recipe");
                 });
