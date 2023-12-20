@@ -1,14 +1,14 @@
 ﻿namespace MyRecipes.Web.Controllers
 {
-	using Microsoft.AspNetCore.Authorization;
-	using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore.Storage;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
     using MyRecipes.Services.Data;
     using MyRecipes.Web.ViewModels.Votes;
-	using System.Security.Claims;
-	using System.Threading.Tasks;
 
-	[ApiController]
+    [ApiController]
     [Route("api/[controller]")]
     public class VotesController : BaseController
     {
@@ -21,6 +21,7 @@
 
         [HttpPost]
         [Authorize]
+        [IgnoreAntiforgeryToken]
         public async Task<ActionResult<PostVoteResponseModel>> Post(PostVoteInputModel input)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value; // getting userId from the cookie

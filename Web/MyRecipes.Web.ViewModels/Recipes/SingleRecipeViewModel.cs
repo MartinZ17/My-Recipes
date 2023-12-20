@@ -5,11 +5,14 @@
     using System.Linq;
 
     using AutoMapper;
+    using Microsoft.EntityFrameworkCore.Storage;
     using MyRecipes.Data.Models;
     using MyRecipes.Services.Mapping;
 
     public class SingleRecipeViewModel : IMapFrom<Recipe>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string CategoryName { get; set; }

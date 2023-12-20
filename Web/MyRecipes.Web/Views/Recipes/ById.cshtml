@@ -24,7 +24,7 @@
 						<li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
 						<li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
 						<li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
-						<li><span>4/5<span> / 5</span></span> </li>
+						<li><span id="averageVoteValue">4/5</span><span> / 5</span> </li>
 					</ul>
 				</li>
 			</ul>
@@ -39,7 +39,7 @@
 				<div class="feature-wrap">
 					<div class="media">
 						<div class="feature-icon">
-							 <i class="far fa-clock"></i> 
+							<i class="far fa-clock"></i>
 						</div>
 						<div class="media-body space-sm">
 							<div class="feature-title">PREP TIME</div>
@@ -71,13 +71,13 @@
 							<div class="feature-title">SERVING</div>
 							<div class="feature-sub-title">
 								@Model.PortionCount
-								@if (@Model.PortionCount == 1) 
+								@if (@Model.PortionCount == 1)
 								{
 									<span>Person</span>
 								}
-								else 
+								else
 								{
-								<span>People</span>
+									<span>People</span>
 								}
 							</div>
 						</div>
@@ -115,7 +115,7 @@
 							<label for="checkbox1">@ingredient.IngredientName - @ingredient.Quantity</label>
 						</div>
 					}
-					
+
 				</div>
 			</div>
 		</div>
@@ -125,8 +125,19 @@
 @section Scripts {
 	<script>
 		$("li[data-vote]").each(function (el) {
-			$(this).on("click", function () {
-				console.log($(this));
+			$(this).click(function () {
+				var value = $(this).attr("data-vote");
+				var recipeId = @Model.Id;
+				var data = { recipeId: recipeId, value: value };
+				$.ajax({
+					type: "POST",
+					url: "/api/Votes",
+					data: JSON.stringify(data),
+					success: function (data) {
+						$('#averageVoteValue').html(data.averageVote);
+					},
+					contentType: 'application/json',
+				});
 			})
 		});
 	</script>
