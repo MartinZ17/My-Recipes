@@ -21,7 +21,6 @@
 
         [HttpPost]
         [Authorize]
-        [IgnoreAntiforgeryToken]
         public async Task<ActionResult<PostVoteResponseModel>> Post(PostVoteInputModel input)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value; // getting userId from the cookie
