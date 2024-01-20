@@ -17,24 +17,27 @@
     // 3. Service
     public class HomeController : BaseController
     {
-        public IGetCountsService CountsService { get; }
+        private readonly IRecipesService recipesService;
+        private readonly IGetCountsService countsService;
 
-        public HomeController(IGetCountsService countsService)
+        public HomeController(IGetCountsService countsService, IRecipesService recipesService)
         {
-            this.CountsService = countsService;
+            this.countsService = countsService;
+            this.recipesService = recipesService;
         }
 
         public IActionResult Index()
         {
-            var countsDto = this.CountsService.GetCounts();
+            var countsDto = this.countsService.GetCounts();
 
-            // var viewModel = this.Mapper.Map<IndexViewModel>(countsDto); //shorter version 
+            // var viewModel = this.Mapper.Map<IndexViewModel>(countsDto); //shorter version
             var viewModel = new IndexViewModel
             {
                 CategoriesCount = countsDto.CategoriesCount,
                 ImagesCount = countsDto.ImagesCount,
                 IngredientsCount = countsDto.IngredientsCount,
                 RecipesCount = countsDto.RecipesCount,
+                RandomRecipes = this.recipesService.GetRandom<IndexPageRecipeViewModel>(4),
             };
             return this.View(viewModel);
         }
