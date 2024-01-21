@@ -5,6 +5,12 @@
 
 <h1>@ViewData["Title"]</h1>
 
+@if (!Model.Recipes.Any())
+{
+	<p>Nothing found. :( </p>
+}
+else
+{
 <div class="row">
 	@foreach (var recipe in this.Model.Recipes)
 	{
@@ -18,3 +24,4 @@
 		</div>
 	}
 </div>
+}
