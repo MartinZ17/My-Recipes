@@ -110,5 +110,13 @@
             var recipe = this.recipesService.GetById<SingleRecipeViewModel>(id);
             return this.View(recipe);
         }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.recipesService.DeleteAsync(id);
+            return this.RedirectToAction(nameof(this.All)); // Same like this.RedirectToAction("All")
+        }
     }
 }

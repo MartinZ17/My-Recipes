@@ -34,6 +34,14 @@
 						<a asp-controller="Recipes" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-secondary">Edit</a>
 					</li>
 				}
+				@if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+				{
+					<li class="single-meta">
+						<form asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
+						</form>
+						<button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+					</li>
+				}
 			</ul>
 		</div>
 	</div>
@@ -128,6 +136,26 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal" id="deleteModal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Delete recipe</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Do you want to delete "@Model.Name"?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+				<button type="button" class="btn btn-danger" onclick="deleteForm.submit()">Yes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 
 <form method="post" id="antiForgeryForm"></form>
 
