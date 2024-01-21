@@ -7,7 +7,7 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<form method="post">
+<form method="post" id="editForm">
 	<div class="form-group">
 		<label asp-for="Name"></label>
 		<input asp-for="Name" class="form-control" />
@@ -38,9 +38,28 @@
 		<select asp-for="CategoryId" asp-items="categoryItems" class="form-control"></select>
 		<span asp-validation-for="CategoryId" class="text-danger"></span>
 	</div>
-	
+
 	<hr />
 	<input type="hidden" asp-for="Id" />
-	<input type="submit" class="btn btn-success" value="Save changes" />
-
 </form>
+
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEdit">Save changes</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Confirm edit</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				Do you want to confirm changes?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>

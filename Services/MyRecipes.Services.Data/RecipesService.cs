@@ -5,8 +5,9 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-	using Microsoft.EntityFrameworkCore;
-	using MyRecipes.Data.Common.Repositories;
+
+    using Microsoft.EntityFrameworkCore;
+    using MyRecipes.Data.Common.Repositories;
     using MyRecipes.Data.Models;
     using MyRecipes.Services.Mapping;
     using MyRecipes.Web.ViewModels.Recipes;
@@ -98,6 +99,17 @@
                 .Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
            return recipe;
+        }
+
+        public IEnumerable<T> GetByIngredients<T>(IEnumerable<int> ingredientsIds)
+        {
+            var query = this.recipesRepository.All().AsQueryable();
+            foreach (var ingredientId in ingredientsIds)
+            {
+                query = query.Where(x => x.Ingredients.Any(i => i.IngredientId == ingredientId));
+            }
+
+            return query.To<T>().ToList();
         }
 
         public int GetCount()
