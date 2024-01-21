@@ -5,8 +5,8 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using MyRecipes.Data.Common.Repositories;
+	using Microsoft.EntityFrameworkCore;
+	using MyRecipes.Data.Common.Repositories;
     using MyRecipes.Data.Models;
     using MyRecipes.Services.Mapping;
     using MyRecipes.Web.ViewModels.Recipes;
@@ -111,6 +111,19 @@
                 .OrderBy(x => Guid.NewGuid()) // Selecting random recipes
                 .Take(count)
                 .To<T>().ToList();
+        }
+
+        public async Task UpdateAsync(int id, EditRecipeInputModel input)
+        {
+            var recipes = this.recipesRepository.All().FirstOrDefault(x => x.Id == id);
+            recipes.Name = input.Name;
+            recipes.Instructions = input.Instructions;
+            recipes.CookingTime = TimeSpan.FromMinutes(input.CookingTime);
+            recipes.PreparationTime = TimeSpan.FromMinutes(input.PreparationTime);
+            recipes.PortionCount = input.PortionCount;
+            recipes.CategoryId = input.CategoryId;
+
+            await this.recipesRepository.SaveChangesAsync();
         }
     }
 }

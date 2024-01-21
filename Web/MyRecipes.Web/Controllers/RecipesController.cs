@@ -6,7 +6,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using MyRecipes.Data.Models;
+	using MyRecipes.Common;
+	using MyRecipes.Data.Models;
     using MyRecipes.Services.Data;
     using MyRecipes.Web.ViewModels.Recipes;
 
@@ -26,6 +27,28 @@
             this.userManager = userManager;
         }
 
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.recipesService.GetById<EditRecipeInputModel>(id);
+            inputModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Edit(int id, EditRecipeInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                return this.View(input);
+            }
+
+            await this.recipesService.UpdateAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.ById), new { id }); // Redirect to ById View
+        }
 
         [Authorize]
         public IActionResult Create()
