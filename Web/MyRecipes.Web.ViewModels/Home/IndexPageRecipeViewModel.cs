@@ -20,6 +20,8 @@
 
         public TimeSpan CookingTime { get; set; }
 
+        public string AddedByUserUserName { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Recipe, IndexPageRecipeViewModel>()

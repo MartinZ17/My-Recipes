@@ -38,6 +38,7 @@
                 IngredientsCount = countsDto.IngredientsCount,
                 RecipesCount = countsDto.RecipesCount,
                 RandomRecipes = this.recipesService.GetRandom<IndexPageRecipeViewModel>(3),
+                LatestRecipes = this.recipesService.GetLatest <IndexPageRecipeViewModel>(3),
             };
             return this.View(viewModel);
         }

@@ -17,10 +17,13 @@
 
         T GetById<T>(int id);
 
+        IEnumerable<T> GetLatest<T>(int count);
+
         Task UpdateAsync(int id, EditRecipeInputModel input);
 
         IEnumerable<T> GetByIngredients<T>(IEnumerable<int> ingredientsIds);
 
         Task DeleteAsync(int id);
+
     }
 }

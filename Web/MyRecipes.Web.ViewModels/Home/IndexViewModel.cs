@@ -6,6 +6,8 @@
     {
         public IEnumerable<IndexPageRecipeViewModel> RandomRecipes { get; set; }
 
+        public IEnumerable<IndexPageRecipeViewModel> LatestRecipes { get; set; }
+
         public int RecipesCount { get; set; }
 
         public int CategoriesCount { get; set; }

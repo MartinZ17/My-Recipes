@@ -124,6 +124,14 @@
             return this.recipesRepository.All().Count();
         }
 
+        public IEnumerable<T> GetLatest<T>(int count)
+        {
+            return this.recipesRepository.All().OrderByDescending(x => x.Id)
+                .Take(count)
+                .To<T>()
+                .ToList();
+        }
+
         public IEnumerable<T> GetRandom<T>(int count)
         {
             return this.recipesRepository.All()
