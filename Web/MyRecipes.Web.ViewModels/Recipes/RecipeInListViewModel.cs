@@ -1,5 +1,6 @@
 ﻿namespace MyRecipes.Web.ViewModels.Recipes
 {
+    using System;
     using System.Linq;
 
     using AutoMapper;
@@ -17,6 +18,10 @@
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }
+
+        public string AddedByUserUserName { get; set; }
+
+        public TimeSpan CookingTime { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

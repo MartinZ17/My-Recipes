@@ -1,0 +1,54 @@
+﻿@model MyRecipes.Web.ViewModels.SearchRecipes.ListViewModel
+@{
+	ViewData["Title"] = "Search result";
+}
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<section class="recipe-without-sidebar-wrap padding-top-50 padding-bottom-22">
+	<div class="container">
+		<div class="row">
+			@foreach (var recipe in Model.Recipes)
+			{
+				<div class="col-lg-4 col-md-6 col-sm-6 col-12">
+					<div class="product-box-layout1">
+						<figure class="item-figure">
+							<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+								<img src="@recipe.ImageUrl"
+									 alt="Product">
+							</a>
+						</figure>
+						<div class="item-content">
+							<span class="sub-title">@recipe.CategoryName</span>
+							<h3 class="item-title">
+								<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+									@recipe.Name
+								</a>
+							</h3>
+							<ul class="item-rating">
+								<li class="star-fill"><i class="fas fa-star"></i></li>
+								<li class="star-fill"><i class="fas fa-star"></i></li>
+								<li class="star-fill"><i class="fas fa-star"></i></li>
+								<li class="star-fill"><i class="fas fa-star"></i></li>
+								<li class="star-empty"><i class="fas fa-star"></i></li>
+								<li><span>9<span> / 10</span></span> </li>
+							</ul>
+							<ul class="entry-meta">
+								<li>
+									<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+										<i class="fas fa-clock"></i>@recipe.CookingTime.TotalMinutes Mins
+									</a>
+								</li>
+								<li>
+									<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+										<i class="fas fa-user"></i>by <span>@recipe.AddedByUserUserName</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>

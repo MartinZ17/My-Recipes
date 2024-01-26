@@ -19,11 +19,13 @@
     {
         private readonly IRecipesService recipesService;
         private readonly IGetCountsService countsService;
+        private readonly ICategoriesService categoriesService;
 
-        public HomeController(IGetCountsService countsService, IRecipesService recipesService)
+        public HomeController(IGetCountsService countsService, IRecipesService recipesService, ICategoriesService categoriesService)
         {
             this.countsService = countsService;
             this.recipesService = recipesService;
+            this.categoriesService = categoriesService;
         }
 
         public IActionResult Index()
@@ -38,7 +40,8 @@
                 IngredientsCount = countsDto.IngredientsCount,
                 RecipesCount = countsDto.RecipesCount,
                 RandomRecipes = this.recipesService.GetRandom<IndexPageRecipeViewModel>(3),
-                LatestRecipes = this.recipesService.GetLatest <IndexPageRecipeViewModel>(3),
+                LatestRecipes = this.recipesService.GetLatest<IndexPageRecipeViewModel>(3),
+                PopularCategories = this.categoriesService.GetAllPopular<IndexCategoryViewModel>(),
             };
             return this.View(viewModel);
         }

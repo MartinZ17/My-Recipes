@@ -8,6 +8,8 @@
 
         public IEnumerable<IndexPageRecipeViewModel> LatestRecipes { get; set; }
 
+        public IEnumerable<IndexCategoryViewModel> PopularCategories { get; set; }
+
         public int RecipesCount { get; set; }
 
         public int CategoriesCount { get; set; }

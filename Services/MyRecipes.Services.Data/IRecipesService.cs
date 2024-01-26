@@ -23,6 +23,8 @@
 
         IEnumerable<T> GetByIngredients<T>(IEnumerable<int> ingredientsIds);
 
+        IEnumerable<T> GetByCategoryId<T>(int categoryId);
+
         Task DeleteAsync(int id);
 
     }

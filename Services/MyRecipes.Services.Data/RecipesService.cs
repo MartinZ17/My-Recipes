@@ -100,6 +100,14 @@
             return recipes;
         }
 
+        public IEnumerable<T> GetByCategoryId<T>(int categoryId)
+        {
+            return this.recipesRepository.All()
+                .Where(x => x.CategoryId == categoryId)
+                .To<T>()
+                .ToList();
+        }
+
         public T GetById<T>(int id)
         {
            var recipe = this.recipesRepository.AllAsNoTracking()
