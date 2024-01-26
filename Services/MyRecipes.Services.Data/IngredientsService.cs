@@ -8,7 +8,7 @@
 
     using MyRecipes.Data.Common.Repositories;
     using MyRecipes.Data.Models;
-	using MyRecipes.Services.Mapping;
+    using MyRecipes.Services.Mapping;
 
     public class IngredientsService : IIngredientsService
     {
