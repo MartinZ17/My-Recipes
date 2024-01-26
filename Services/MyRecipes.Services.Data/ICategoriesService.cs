@@ -6,6 +6,6 @@
     {
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
 
-        IEnumerable<T> GetAllPopular<T>();
+        IEnumerable<T> GetPopular<T>();
     }
 }

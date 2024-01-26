@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using MyRecipes.Web.ViewModels.Home;
     using MyRecipes.Web.ViewModels.Recipes;
 
     public interface IRecipesService
@@ -19,6 +20,8 @@
 
         IEnumerable<T> GetLatest<T>(int count);
 
+        T[] GetTrending<T>();
+
         Task UpdateAsync(int id, EditRecipeInputModel input);
 
         IEnumerable<T> GetByIngredients<T>(IEnumerable<int> ingredientsIds);
@@ -26,6 +29,5 @@
         IEnumerable<T> GetByCategoryId<T>(int categoryId);
 
         Task DeleteAsync(int id);
-
     }
 }

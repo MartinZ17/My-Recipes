@@ -9,8 +9,9 @@
 <section class="padding-bottom-18">
 	<div class="container">
 		<div class="row">
-			<h2 class="item-heading">POPULAR RECIPES</h2>
-			<hr/>
+			<div class="section-heading heading-dark">
+				<h2 class="item-heading">POPULAR RECIPES</h2>
+			</div>
 			@foreach (var recipe in this.Model.RandomRecipes)
 			{
 				<div class="col-lg-4 col-md-6 col-sm-12">
@@ -63,18 +64,17 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="product-box-layout1">
-							<figure class="item-figure">
-								<a href="single-recipe1.html">
-									<img src="img/product/product4.jpg"
+							<figure class="item-figure text-center">
+								<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[0].Id">
+									<img src="@Model.TrendingRecipes[0].ImageUrl"
 										 alt="Product">
 								</a>
 							</figure>
 							<div class="item-content">
-								<span class="sub-title"></span>
+								<span class="sub-title">@Model.TrendingRecipes[0].CategoryName</span>
 								<h2 class="item-title">
-									<a href="single-recipe1.html">
-										Chanterelle and Porcini
-										Mushroom Recipes
+									<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[0].Id">
+										@Model.TrendingRecipes[0].Name
 									</a>
 								</h2>
 								<ul class="item-rating">
@@ -86,29 +86,43 @@
 									<li><span>9<span> / 10</span></span> </li>
 								</ul>
 								<p>
-									More off this less hello salamander lied porpoise much over tightly circa
-									horse taped so innocuously side crud mightily rigorous plot life. New homes
-									in particular are subject.
+									@(Model.TrendingRecipes[0].Instructions.Substring(0, 200) + "....")
 								</p>
 								<ul class="entry-meta">
-									<li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-									<li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
-									<li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[0].Id">
+											<i class="fas fa-clock"></i>@Model.TrendingRecipes[0].CookingTime.TotalMinutes Mins
+										</a>
+									</li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[0].Id">
+											<i class="fas fa-user"></i>by <span>@Model.TrendingRecipes[0].AddedByUserUserName</span>
+										</a>
+									</li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[0].Id">
+											<i class="fas fa-heart"></i><span>11569</span> Likes
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-6 col-12">
 						<div class="product-box-layout1">
-							<figure class="item-figure">
-								<a href="single-recipe1.html">
-									<img src="img/product/product5.jpg"
+							<figure class="item-figure text-center">
+								<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[1].Id">
+									<img src="@Model.TrendingRecipes[1].ImageUrl"
 										 alt="Product">
 								</a>
 							</figure>
 							<div class="item-content">
-								<span class="sub-title">CHICKEN</span>
-								<h3 class="item-title"><a href="single-recipe1.html">Asian Chicken Noodles</a></h3>
+								<span class="sub-title">@Model.TrendingRecipes[1].CategoryName</span>
+								<h3 class="item-title">
+									<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[1].Id">
+										@Model.TrendingRecipes[1].Name
+									</a>
+								</h3>
 								<ul class="item-rating">
 									<li class="star-fill"><i class="fas fa-star"></i></li>
 									<li class="star-fill"><i class="fas fa-star"></i></li>
@@ -118,28 +132,43 @@
 									<li><span>9<span> / 10</span></span> </li>
 								</ul>
 								<p>
-									More off this less hello salamander lied porpoise much over tightly circa
-									outside crud mightily rigorouse.
+									@(Model.TrendingRecipes[1].Instructions.Substring(0, 200) + "....")
 								</p>
 								<ul class="entry-meta">
-									<li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-									<li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
-									<li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[1].Id">
+											<i class="fas fa-clock"></i>@Model.TrendingRecipes[1].CookingTime.TotalMinutes Mins
+										</a>
+									</li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[1].Id">
+											<i class="fas fa-user"></i>by <span>@Model.TrendingRecipes[1].AddedByUserUserName</span>
+										</a>
+									</li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[1].Id">
+											<i class="fas fa-heart"></i><span>7681</span> Likes
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-6 col-12">
 						<div class="product-box-layout1">
-							<figure class="item-figure">
-								<a href="single-recipe1.html">
-									<img src="img/product/product6.jpg"
+							<figure class="item-figure text-center">
+								<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[2].Id">
+									<img src="@Model.TrendingRecipes[2].ImageUrl"
 										 alt="Product">
 								</a>
 							</figure>
 							<div class="item-content">
-								<span class="sub-title">SALAD</span>
-								<h3 class="item-title"><a href="single-recipe1.html">Italiano Salad Mixed</a></h3>
+								<span class="sub-title">@Model.TrendingRecipes[2].CategoryName</span>
+								<h3 class="item-title">
+									<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[2].Id">
+										@Model.TrendingRecipes[2].Name
+									</a>
+								</h3>
 								<ul class="item-rating">
 									<li class="star-fill"><i class="fas fa-star"></i></li>
 									<li class="star-fill"><i class="fas fa-star"></i></li>
@@ -149,137 +178,24 @@
 									<li><span>9<span> / 10</span></span> </li>
 								</ul>
 								<p>
-									More off this less hello salamander lied porpoise much over tightly circa
-									outside crud mightily rigorouse.
+									@(Model.TrendingRecipes[1].Instructions.Substring(0, 200) + "....")
 								</p>
 								<ul class="entry-meta">
-									<li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-									<li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
-									<li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-12">
-						<div class="product-box-layout1">
-							<figure class="item-figure">
-								<a href="single-recipe1.html">
-									<img src="img/product/product7.jpg"
-										 alt="Product">
-								</a>
-							</figure>
-							<div class="item-content">
-								<span class="sub-title">DINNER</span>
-								<h3 class="item-title"><a href="single-recipe1.html">Maxican Dessert</a></h3>
-								<ul class="item-rating">
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-empty"><i class="fas fa-star"></i></li>
-									<li><span>9<span> / 10</span></span> </li>
-								</ul>
-								<p>
-									More off this less hello salamander lied porpoise much over tightly circa
-									outside crud mightily rigorouse.
-								</p>
-								<ul class="entry-meta">
-									<li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-									<li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
-									<li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-12">
-						<div class="product-box-layout1">
-							<figure class="item-figure">
-								<a href="single-recipe1.html">
-									<img src="img/product/product8.jpg"
-										 alt="Product">
-								</a>
-							</figure>
-							<div class="item-content">
-								<span class="sub-title">JUICE</span>
-								<h3 class="item-title"><a href="single-recipe1.html">Soypan Fruits Juice</a></h3>
-								<ul class="item-rating">
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-empty"><i class="fas fa-star"></i></li>
-									<li><span>9<span> / 10</span></span> </li>
-								</ul>
-								<p>
-									More off this less hello salamander lied porpoise much over tightly circa
-									outside crud mightily rigorouse.
-								</p>
-								<ul class="entry-meta">
-									<li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-									<li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
-									<li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-12">
-						<div class="product-box-layout1">
-							<figure class="item-figure">
-								<a href="single-recipe1.html">
-									<img src="img/product/product9.jpg"
-										 alt="Product">
-								</a>
-							</figure>
-							<div class="item-content">
-								<span class="sub-title">BREAKFAST</span>
-								<h3 class="item-title"><a href="single-recipe1.html">Crepes with Forest</a></h3>
-								<ul class="item-rating">
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-empty"><i class="fas fa-star"></i></li>
-									<li><span>9<span> / 10</span></span> </li>
-								</ul>
-								<p>
-									More off this less hello salamander lied porpoise much over tightly circa
-									outside crud mightily rigorouse.
-								</p>
-								<ul class="entry-meta">
-									<li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-									<li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
-									<li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-12">
-						<div class="product-box-layout1">
-							<figure class="item-figure">
-								<a href="single-recipe1.html">
-									<img src="img/product/product10.jpg"
-										 alt="Product">
-								</a>
-							</figure>
-							<div class="item-content">
-								<span class="sub-title">DINNER</span>
-								<h3 class="item-title"><a href="single-recipe1.html">Asian Chicken Noodles</a></h3>
-								<ul class="item-rating">
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-empty"><i class="fas fa-star"></i></li>
-									<li><span>9<span> / 10</span></span> </li>
-								</ul>
-								<p>
-									More off this less hello salamander lied porpoise much over tightly circa
-									outside crud mightily rigorouse.
-								</p>
-								<ul class="entry-meta">
-									<li><a href="#"><i class="fas fa-clock"></i>15 Mins</a></li>
-									<li><a href="#"><i class="fas fa-user"></i>by <span>John Martin</span></a></li>
-									<li><a href="#"><i class="fas fa-heart"></i><span>02</span> Likes</a></li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[2].Id">
+											<i class="fas fa-clock"></i>@Model.TrendingRecipes[2].CookingTime.TotalMinutes Mins
+										</a>
+									</li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[2].Id">
+											<i class="fas fa-user"></i>by <span>@Model.TrendingRecipes[2].AddedByUserUserName</span>
+										</a>
+									</li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@Model.TrendingRecipes[2].Id">
+											<i class="fas fa-heart"></i><span>9371</span> Likes
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -297,17 +213,25 @@
 					</div>
 					<div class="widget-follow-us">
 						<ul>
-							<li class="single-item"><a href="https://www.facebook.com/groups/bgkulinar/?locale=bg_BG" target="_blank">
-								<i class="fab fa-facebook-f"></i>LIKE ME ON</a>
+							<li class="single-item">
+								<a href="https://www.facebook.com/groups/bgkulinar/?locale=bg_BG" target="_blank">
+									<i class="fab fa-facebook-f"></i>LIKE ME ON
+								</a>
 							</li>
-							<li class="single-item"><a href="https://www.instagram.com/_matekitchen_/" target="_blank">
-								<i class="fab fa-twitter"></i>LIKE ME</a>
+							<li class="single-item">
+								<a href="https://www.instagram.com/_matekitchen_/" target="_blank">
+									<i class="fab fa-twitter"></i>LIKE ME
+								</a>
 							</li>
-							<li class="single-item"><a href="https://twitter.com/RecipesIdeas" target="_blank">
-								<i class="fab fa-instagram"></i>LIKE ME</a>
+							<li class="single-item">
+								<a href="https://twitter.com/RecipesIdeas" target="_blank">
+									<i class="fab fa-instagram"></i>LIKE ME
+								</a>
 							</li>
-							<li class="single-item"><a href="@Html.Raw("https://youtube.com/@zvezdevBG")" target="_blank">
-								<i class="fab fa-youtube"></i>Subscribe</a>
+							<li class="single-item">
+								<a href="@Html.Raw("https://youtube.com/@zvezdevBG")" target="_blank">
+									<i class="fab fa-youtube"></i>Subscribe
+								</a>
 							</li>
 						</ul>
 					</div>

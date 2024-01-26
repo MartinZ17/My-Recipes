@@ -41,7 +41,8 @@
                 RecipesCount = countsDto.RecipesCount,
                 RandomRecipes = this.recipesService.GetRandom<IndexPageRecipeViewModel>(3),
                 LatestRecipes = this.recipesService.GetLatest<IndexPageRecipeViewModel>(3),
-                PopularCategories = this.categoriesService.GetAllPopular<IndexCategoryViewModel>(),
+                PopularCategories = this.categoriesService.GetPopular<IndexCategoryViewModel>(),
+                TrendingRecipes = this.recipesService.GetTrending<IndexPageRecipeViewModel>(),
             };
             return this.View(viewModel);
         }
