@@ -15,6 +15,8 @@
 
         public string Name { get; set; }
 
+        public string Instructions { get; set; }
+
         public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }

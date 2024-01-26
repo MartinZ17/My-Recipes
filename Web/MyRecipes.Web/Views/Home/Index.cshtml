@@ -10,6 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<h2 class="item-heading">POPULAR RECIPES</h2>
+			<hr/>
 			@foreach (var recipe in this.Model.RandomRecipes)
 			{
 				<div class="col-lg-4 col-md-6 col-sm-12">
@@ -35,6 +36,9 @@
 								<li class="star-empty"><i class="fas fa-star"></i></li>
 								<li><span><span> / 10</span></span> </li>
 							</ul>
+							<p>
+								@(recipe.Instructions.Substring(0, 100) + "....")
+							</p>
 							<ul class="entry-meta">
 								<li><a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id"><i class="fas fa-clock"></i>@recipe.CookingTime.TotalMinutes Mins</a></li>
 								<li><a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id"><i class="fas fa-user"></i>by <span>@recipe.AddedByUserUserName</span></a></li>

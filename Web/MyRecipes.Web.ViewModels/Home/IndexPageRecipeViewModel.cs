@@ -4,7 +4,8 @@
     using System.Linq;
 
     using AutoMapper;
-    using MyRecipes.Data.Models;
+	using Microsoft.Identity.Client;
+	using MyRecipes.Data.Models;
     using MyRecipes.Services.Mapping;
     using MyRecipes.Web.ViewModels.Recipes;
 
@@ -13,6 +14,8 @@
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Instructions { get; set; }
 
         public string CategoryName { get; set; }
 

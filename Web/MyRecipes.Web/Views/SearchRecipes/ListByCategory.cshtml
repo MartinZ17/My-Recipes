@@ -12,10 +12,10 @@
 			{
 				<div class="col-lg-4 col-md-6 col-sm-6 col-12">
 					<div class="product-box-layout1">
-						<figure class="item-figure">
+						<figure class="item-figure text-center">
 							<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
 								<img src="@recipe.ImageUrl"
-									 alt="Product">
+									 alt="Product" class="align-content-center">
 							</a>
 						</figure>
 						<div class="item-content">
@@ -33,6 +33,9 @@
 								<li class="star-empty"><i class="fas fa-star"></i></li>
 								<li><span>9<span> / 10</span></span> </li>
 							</ul>
+							<p>
+								@(recipe.Instructions.Substring(0, 100) + "....")
+							</p>
 							<ul class="entry-meta">
 								<li>
 									<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
