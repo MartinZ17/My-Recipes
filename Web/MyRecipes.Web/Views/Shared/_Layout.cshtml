@@ -8,47 +8,62 @@
 	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
 	<link href="~/css/styles.css" rel="stylesheet" asp-append-version="true" />
 	<link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+	<link rel="stylesheet" href="~/fonts/flaticon.css" asp-append-version="true">
 	<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
 </head>
 <body>
 	<div id="wrapper" class="wrapper">
-		<header>
-			<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+		<header class="header-one">
+			<div id="header-main-menu" class="header-main-menu header-sticky">
 				<div class="container">
-					<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-						<ul class="navbar-nav flex-grow-1">
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="All">All Recipes</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link text-dark" asp-area="" asp-controller="SearchRecipes" asp-action="Index">Search</a>
-							</li>
-							@if (User.Identity.IsAuthenticated)
-							{
-								<li class="nav-item">
-									<a class="nav-link text-dark" asp-area="" asp-controller="Recipes" asp-action="Create">Create Recipe</a>
-								</li>
-							}
-							@if (User.IsInRole(GlobalConstants.AdministratorRoleName))
-							{
-								<li class="nav-item">
-									<a class="nav-link text-dark" asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Admin</a>
-								</li>
-							}
-						</ul>
+					<div class="row">
+						<div class="col-lg-8 col-md-3 col-sm-4 col-4 possition-static">
+							<nav class="site-nav">
+								<ul id="site-menu" class="site-menu">
+									<li>
+										<a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+									</li>
+									<li>
+										<a asp-area="" asp-controller="Recipes" asp-action="All">All Recipes</a>
+									</li>
+									<li>
+										<a asp-area="" asp-controller="SearchRecipes" asp-action="Index">Search</a>
+									</li>
+									@if (User.Identity.IsAuthenticated)
+									{
+										<li>
+											<a asp-area="" asp-controller="Recipes" asp-action="Create">Create Recipe</a>
+										</li>
+									}
+								</ul>
+								
+
+							</nav>
+						</div>
 						<partial name="_LoginPartial" />
 					</div>
 				</div>
-			</nav>
+			</div>
+			<div class="header-bottom d-none d-lg-block">
+				<div class="container">
+					<div class="row">
+
+						@* <div class="col-lg-12 d-none d-lg-block">
+							<figure class="item-feature">
+								<a>
+									<img src="~/images/src/single-banner1.jpg" />
+								</a>
+							</figure>
+						</div> *@
+						<div class="col-lg-12 d-none d-lg-block">
+							<div class="site-logo-desktop">
+								<a class="main-logo"><img src="~/images/src/siteLogo.png" width="150" height="150" alt="Site Logo"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</header>
 
 		<div class="container">

@@ -62,4 +62,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\recipes\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\fonts\Flaticon.svg" />
+  </ItemGroup>
 </Project>
