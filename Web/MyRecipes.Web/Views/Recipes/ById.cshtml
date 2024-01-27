@@ -42,27 +42,27 @@
 			</ul>
 		</div>
 	</div>
-	<div class="item-figure">
+	<div class="item-figure text-center">
 		<img src="@Model.ImageUrl" class="img-fluid w-75" alt="@Model.Name">
 	</div>
 	<div class="item-feature">
 		<ul>
 			<li>
 				<div class="feature-wrap">
-					<div class="media">
+					<div class="media d-flex">
 						<div class="feature-icon">
 							<i class="far fa-clock"></i>
 						</div>
 						<div class="media-body space-sm">
-							<div class="feature-title">PREP TIME</div>
-							<div class="feature-sub-title">@Model.PreparationTime.TotalMinutes Mins</div>
+							<div class="feature-title mt-0">PREP TIME</div>
+							<div class="feature-sub-title mt-0">@Model.PreparationTime.TotalMinutes Mins</div>
 						</div>
 					</div>
 				</div>
 			</li>
 			<li>
 				<div class="feature-wrap">
-					<div class="media">
+					<div class="media d-flex">
 						<div class="feature-icon">
 							<i class="fas fa-utensils"></i>
 						</div>
@@ -75,7 +75,7 @@
 			</li>
 			<li>
 				<div class="feature-wrap">
-					<div class="media">
+					<div class="media d-flex">
 						<div class="feature-icon">
 							<i class="fas fa-users"></i>
 						</div>
@@ -98,7 +98,7 @@
 			</li>
 			<li>
 				<div class="feature-wrap">
-					<div class="media">
+					<div class="media d-flex">
 						<div class="feature-icon">
 							<i class="fa fa-list-ol"></i>
 						</div>
@@ -113,7 +113,10 @@
 	</div>
 	<div class="making-elements-wrap">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-6 ingridients-wrap">
+				<div class="section-heading heading-dark">
+					<h2 class="item-heading">Instructions</h2>
+				</div>
 				<p class="item-description">
 					@Model.Instructions
 				</p>
@@ -126,8 +129,8 @@
 						<div class="checkbox checkbox-primary">
 							<label for="checkbox1">@ingredient.IngredientName - @ingredient.Quantity</label>
 						</div>
-					}
 
+					}
 				</div>
 			</div>
 		</div>
