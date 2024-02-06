@@ -10,23 +10,26 @@
     public abstract class BaseRecipeInputModel
     {
         [Required]
-        [MinLength(4)]
+        [MinLength(3)]
         public string Name { get; set; }
 
         [Required]
         [MinLength(100)]
         public string Instructions { get; set; }
 
+        [Required]
         [Range(0, 24 * 60)] // One day
         [Display(Name = "Preparation time (in minutes)")]
         public int PreparationTime { get; set; }
 
+        [Required]
         [Range(0, 24 * 60)] // The same
         [Display(Name = "Cooking time (in minutes)")]
         public int CookingTime { get; set; }
 
         [Required]
         [Range(1, 100)]
+        [Display(Name = "Portion count")]
         public int PortionCount { get; set; }
 
         [Required]
