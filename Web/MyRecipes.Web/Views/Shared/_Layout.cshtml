@@ -68,27 +68,24 @@
 			</main>
 		</div>
 
-		<footer class="ranna-bg-dark">
-			<div @* class="container" *@>
+		<footer class="ranna-bg-dark" style="padding: 45px">
+			<div class="container" style="padding-top: 0px; padding-bottom: 0px;">
 				<div class="footer-logo">
-					<a><img src="~/images/src/siteLogo2.png" class="img-fluid"
-						alt="footer-logo" width="150" height="150" style="padding-top: 0px;" >
+					<a><img src="~/images/src/siteLogo2.png" 
+							 alt="footer-logo" width="150" height="150" style="padding-top: -70px;padding-bottom: 0px; ">
 					</a>
 				</div>
 				<div class="footer-menu">
 					<ul>
-						<li><a href="#">FACEBOOK</a></li>
-						<li><a href="#">TWITTER</a></li>
-						<li><a href="#">INSTAGRAM</a></li>
-						<li><a href="#">PINTEREST</a></li>
-						<li><a href="#">GOOGLEPLUS</a></li>
-						<li><a href="#">YOUTUBE</a></li>
+						<li><a href="https://www.facebook.com/groups/bgkulinar/?locale=bg_BG">FACEBOOK</a></li>
+						<li><a href="https://twitter.com/RecipesIdeas">TWITTER</a></li>
+						<li><a href="https://www.instagram.com/_matekitchen_/">INSTAGRAM</a></li>
+						<li><a "@Html.Raw("https://youtube.com/@zvezdevBG")">YOUTUBE</a></li>
 					</ul>
 				</div>
 				<div class="copyright">
-					&copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+					&copy; @DateTime.Now.Year - @GlobalConstants.SystemName - Developed by <a href="https://linktr.ee/martinz17">Martin Zdravkov</a>
 				</div>
-
 			</div>
 		</footer>
 
