@@ -1,0 +1,70 @@
+﻿@using MyRecipes.Common
+@model MyRecipes.Web.ViewModels.Home.IndexViewModel
+@{
+	int count = 1;
+}
+
+<div class="col-lg-4 sidebar-widget-area sidebar-break-md">
+
+	<div class="widget">
+		<div class="section-heading heading-dark">
+			<h3 class="item-heading">CHECK FOR MORE</h3>
+		</div>
+		<div class="widget-follow-us">
+			<ul>
+				<li class="single-item">
+					<a href="https://www.facebook.com/groups/bgkulinar/?locale=bg_BG" target="_blank">
+						<i class="fab fa-facebook-f"></i>LIKE ME ON
+					</a>
+				</li>
+				<li class="single-item">
+					<a href="https://twitter.com/RecipesIdeas" target="_blank">
+						<i class="fab fa-twitter"></i>LIKE ME
+					</a>
+				</li>
+				<li class="single-item">
+					<a href="https://www.instagram.com/_matekitchen_/" target="_blank">
+						<i class="fab fa-instagram"></i>LIKE ME
+					</a>
+				</li>
+				<li class="single-item">
+					<a href="@Html.Raw("https://youtube.com/@zvezdevBG")" target="_blank">
+						<i class="fab fa-youtube"></i>Subscribe
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="widget">
+		<div class="section-heading heading-dark">
+			<h3 class="item-heading">LATEST RECIPES</h3>
+		</div>
+		<div class="widget-latest">
+			<ul class="block-list">
+				@foreach (var recipe in Model.LatestRecipes)
+				{
+					<li class="single-item">
+						<div class="item-img">
+							<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id"><img src="@recipe.ImageUrl" width="90" height="90" alt="Post"></a>
+							<div class="count-number">@(count++)</div>
+						</div>
+						<div class="item-content">
+							<div class="item-ctg">@recipe.CategoryName</div>
+							<h4 class="item-title">
+								<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+									@recipe.Name
+								</a>
+							</h4>
+							<div class="item-post-by">
+								<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+									<i class="fas fa-user"></i><span>by</span>
+									@recipe.AddedByUserUserName
+								</a>
+							</div>
+						</div>
+					</li>
+				}
+			</ul>
+		</div>
+	</div>
+</div>

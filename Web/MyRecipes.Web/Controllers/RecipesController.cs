@@ -9,7 +9,8 @@
 	using MyRecipes.Common;
 	using MyRecipes.Data.Models;
     using MyRecipes.Services.Data;
-    using MyRecipes.Web.ViewModels.Recipes;
+	using MyRecipes.Web.ViewModels.Home;
+	using MyRecipes.Web.ViewModels.Recipes;
 
     public class RecipesController : Controller
     {
@@ -55,6 +56,7 @@
         {
             var viewModel = new CreateRecipeInputModel();
             viewModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+            viewModel.LatestRecipes = this.recipesService.GetLatest<IndexPageRecipeViewModel>(5);
             return this.View(viewModel);
         }
 
@@ -65,6 +67,7 @@
             if (!this.ModelState.IsValid)
             {
                 input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                input.LatestRecipes = this.recipesService.GetLatest<IndexPageRecipeViewModel>(5);
                 return this.View(input);
             }
 

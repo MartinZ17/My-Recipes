@@ -7,7 +7,9 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public abstract class BaseRecipeInputModel
+    using MyRecipes.Web.ViewModels.Home;
+
+    public abstract class BaseRecipeInputModel : IndexViewModel
     {
         [Required]
         [MinLength(3)]
