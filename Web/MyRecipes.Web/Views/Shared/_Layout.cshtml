@@ -37,7 +37,7 @@
 										</li>
 									}
 								</ul>
-								
+
 
 							</nav>
 						</div>
@@ -69,8 +69,26 @@
 		</div>
 
 		<footer class="ranna-bg-dark">
-			<div class="container">
-				&copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+			<div @* class="container" *@>
+				<div class="footer-logo">
+					<a><img src="~/images/src/siteLogo2.png" class="img-fluid"
+						alt="footer-logo" width="150" height="150" style="padding-top: 0px;" >
+					</a>
+				</div>
+				<div class="footer-menu">
+					<ul>
+						<li><a href="#">FACEBOOK</a></li>
+						<li><a href="#">TWITTER</a></li>
+						<li><a href="#">INSTAGRAM</a></li>
+						<li><a href="#">PINTEREST</a></li>
+						<li><a href="#">GOOGLEPLUS</a></li>
+						<li><a href="#">YOUTUBE</a></li>
+					</ul>
+				</div>
+				<div class="copyright">
+					&copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+				</div>
+
 			</div>
 		</footer>
 

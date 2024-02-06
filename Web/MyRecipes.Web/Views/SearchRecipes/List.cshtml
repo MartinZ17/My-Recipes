@@ -11,17 +11,54 @@
 }
 else
 {
-<div class="row">
-	@foreach (var recipe in this.Model.Recipes)
-	{
-		<div class="card col-md-3">
-			<img class="card-img-top" src="@recipe.ImageUrl" alt="Image of @recipe.Name">
-			<div class="card-body">
-				<h5 class="card-title">@recipe.Name</h5>
-				<p class="card-text">@recipe.CategoryName</p>
-				<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id" class="btn btn-primary">Go to recipe</a>
+	<section class="recipe-without-sidebar-wrap padding-top-50 padding-bottom-22">
+		<div class="container">
+			<div class="row">
+				@foreach (var recipe in Model.Recipes)
+				{
+					<div class="col-lg-4 col-md-6 col-sm-6 col-12">
+						<div class="product-box-layout1">
+							<figure class="item-figure text-center">
+								<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+									<img src="@recipe.ImageUrl"
+										 alt="Product" class="align-content-center">
+								</a>
+							</figure>
+							<div class="item-content">
+								<span class="sub-title">@recipe.CategoryName</span>
+								<h3 class="item-title">
+									<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+										@recipe.Name
+									</a>
+								</h3>
+								<ul class="item-rating">
+									<li class="star-fill"><i class="fas fa-star"></i></li>
+									<li class="star-fill"><i class="fas fa-star"></i></li>
+									<li class="star-fill"><i class="fas fa-star"></i></li>
+									<li class="star-fill"><i class="fas fa-star"></i></li>
+									<li class="star-empty"><i class="fas fa-star"></i></li>
+									<li><span>9<span> / 10</span></span> </li>
+								</ul>
+								<p>
+									@(recipe.Instructions.Substring(0, 100) + "....")
+								</p>
+								<ul class="entry-meta">
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+											<i class="fas fa-clock"></i>@recipe.CookingTime.TotalMinutes Mins
+										</a>
+									</li>
+									<li>
+										<a asp-controller="Recipes" asp-action="ById" asp-route-id="@recipe.Id">
+											<i class="fas fa-user"></i>by <span>@recipe.AddedByUserUserName</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				}
 			</div>
 		</div>
-	}
-</div>
+	</section>
 }
