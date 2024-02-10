@@ -11,10 +11,6 @@
     using MyRecipes.Services.Data;
     using MyRecipes.Web.ViewModels;
     using MyRecipes.Web.ViewModels.Home;
-
-    // 1. ApplicationDbContext
-    // 2. Repository
-    // 3. Service
     public class HomeController : BaseController
     {
         private readonly IRecipesService recipesService;
