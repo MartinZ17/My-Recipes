@@ -4,79 +4,6 @@
 @{
     ViewData["Title"] = "Login";
 }
-
-@* <h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <label asp-for="Input.Email" class="form-label">Email</label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
-                    <label asp-for="Input.Password" class="form-label">Password</label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="checkbox mb-3">
-                    <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
-                        @Html.DisplayNameFor(m => m.Input.RememberMe)
-                    </label>
-                </div>
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div> *@
 <section class="login-page-wrap padding-top-60 padding-bottom-20">
     <div class="container">
         <div class="row gutters-60">
@@ -87,13 +14,13 @@
                     </div>
                     <form class="login-form" method="post" id="account">
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div>
+                            <div class="col-md-12">
                                 <label class="mb-3">Email Address</label>
                                 <input asp-for="Input.Email" class="main-input-box" autocomplete="username"  aria-required="true" placeholder="" />
                                 <span asp-validation-for="Input.Email" class="text-danger"></span> 
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label class="mb-3">Password</label>
                                 <input asp-for="Input.Password" class="main-input-box" autocomplete="current-password" aria-required="true" placeholder="" />
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -103,7 +30,7 @@
                             <div class="col-md-6">
                                 <div class="checkbox checkbox-primary">
                                      <input asp-for="Input.RememberMe" id="checkbox1" type="checkbox">
-                                    <label for="checkbox1">Remember Me</label> @* class="form-check-input" *@ 
+                                    <label for="checkbox1">Remember Me</label> 
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -114,32 +41,7 @@
                             <button id="login-submit" class="btn-fill btn-primary" type="submit" value="Login">Login<i class="flaticon-next"></i></button>
                             <a class="btn-fill btn-dark" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" >Create an Account<i class="flaticon-next"></i></a>
                         </div>
-                        @* <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a> *@
                     </form>
-                    <label>Or Connect With Social Networks</label>
-                    <div class="login-box-social">
-                        <ul>
-                            <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="#" class="google"><i class="fab fa-google-plus-g"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 sidebar-widget-area sidebar-break-md">
-                <div class="widget">
-                    <div class="section-heading heading-dark">
-                        <h3 class="item-heading">ABOUT ME</h3>
-                    </div>
-                    <div class="widget-about">
-                        <figure class="author-figure"><img src="img/figure/about.jpg" alt="about"></figure>
-                        <figure class="author-signature"><img src="img/figure/signature.png" alt="about"></figure>
-                        <p>
-                            Fusce mauris auctor ollicituder teary iner hendrerit risusey aeenean rauctor pibus
-                            doloer.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
