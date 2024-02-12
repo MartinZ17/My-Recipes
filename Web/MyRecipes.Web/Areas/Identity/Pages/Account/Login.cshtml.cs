@@ -16,6 +16,7 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.Extensions.Logging;
     using MyRecipes.Data.Models;
     using MyRecipes.Services.Data;
@@ -25,11 +26,13 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
+        private readonly IRecipesService recipesService;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, IRecipesService recipesService)
         {
             this.signInManager = signInManager;
             this.logger = logger;
+            this.recipesService = recipesService;
         }
 
         /// <summary>
@@ -59,9 +62,15 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
         public string ErrorMessage { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     Gets this API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        ///
+        public IndexViewModel IndexViewModel => new IndexViewModel
+        {
+            LatestRecipes = this.recipesService.GetLatest<IndexPageRecipeViewModel>(5),
+        };
+
         public class InputModel
         {
             /// <summary>
@@ -86,7 +95,6 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
             /// </summary>
             [Display(Name = "Remember me")]
             public bool RememberMe { get; set; }
-
         }
 
         public async Task OnGetAsync(string returnUrl = null)

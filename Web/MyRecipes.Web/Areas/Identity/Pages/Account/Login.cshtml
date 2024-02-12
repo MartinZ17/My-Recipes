@@ -44,6 +44,7 @@
                     </form>
                 </div>
             </div>
+            @await Html.PartialAsync("_SidebarPartial", new IndexViewModel{ LatestRecipes = Model.IndexViewModel.LatestRecipes})
         </div>
     </div>
 </section>
