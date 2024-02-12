@@ -22,58 +22,68 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
     using MyRecipes.Data.Models;
+    using MyRecipes.Services.Data;
+    using MyRecipes.Web.ViewModels.Home;
 
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IUserStore<IdentityUser> userStore;
+        private readonly IUserStore<ApplicationUser> userStore;
         private readonly IUserEmailStore<ApplicationUser> emailStore;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
+        private readonly IRecipesService recipesService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
-            IUserStore<IdentityUser> userStore,
+            IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IRecipesService recipesService)
         {
             this.userManager = userManager;
             this.userStore = userStore;
-            this.emailStore = (IUserEmailStore<ApplicationUser>)this.GetEmailStore();
+            this.emailStore = this.GetEmailStore();
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
+            this.recipesService = recipesService;
         }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     Gets or sets this API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     Gets or sets this API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public string ReturnUrl { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     Gets or sets this API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     Gets this API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        public IndexViewModel IndexViewModel => new IndexViewModel
+        {
+            LatestRecipes = this.recipesService.GetLatest<IndexPageRecipeViewModel>(5),
+        };
+
         public class InputModel
         {
             /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     Gets or sets this API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
@@ -82,7 +92,7 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     Gets or sets this API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
@@ -92,7 +102,7 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
             public string Password { get; set; }
 
             /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     Gets or sets this API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
@@ -117,15 +127,15 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
                 var user = this.CreateUser();
 
                 await this.userStore.SetUserNameAsync(user, this.Input.Email, CancellationToken.None);
-                await this.emailStore.SetEmailAsync((ApplicationUser)user, this.Input.Email, CancellationToken.None);
-                var result = await this.userManager.CreateAsync((ApplicationUser)user, this.Input.Password);
+                await this.emailStore.SetEmailAsync(user, this.Input.Email, CancellationToken.None);
+                var result = await this.userManager.CreateAsync(user, this.Input.Password);
 
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
 
-                    var userId = await this.userManager.GetUserIdAsync((ApplicationUser)user);
-                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync((ApplicationUser)user);
+                    var userId = await this.userManager.GetUserIdAsync(user);
+                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = this.Url.Page(
                         "/Account/ConfirmEmail",
@@ -142,10 +152,11 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await this.signInManager.SignInAsync((ApplicationUser)user, isPersistent: false);
+                        await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     this.ModelState.AddModelError(string.Empty, error.Description);
@@ -156,16 +167,16 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
             return this.Page();
         }
 
-        private IdentityUser CreateUser()
+        private ApplicationUser CreateUser()
         {
             try
             {
-                return Activator.CreateInstance<IdentityUser>();
+                return Activator.CreateInstance<ApplicationUser>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
-                    $"Ensure that '{nameof(IdentityUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
+                    $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
@@ -176,6 +187,7 @@ namespace MyRecipes.Web.Areas.Identity.Pages.Account
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
+
             return (IUserEmailStore<ApplicationUser>)this.userStore;
         }
     }
