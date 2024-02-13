@@ -6,6 +6,7 @@
     using AutoMapper;
     using MyRecipes.Data.Models;
     using MyRecipes.Services.Mapping;
+    using MyRecipes.Web.ViewModels.Home;
 
     public class RecipeInListViewModel : IMapFrom<Recipe>, IHaveCustomMappings
     {
@@ -25,9 +26,13 @@
 
         public TimeSpan CookingTime { get; set; }
 
+        public double AverageVote { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Recipe, RecipeInListViewModel>()
+                .ForMember(x => x.AverageVote, opt =>
+                    opt.MapFrom(x => x.Votes.Count() == 0 ? 0 : x.Votes.Average(v => v.Value)))
                 .ForMember(x => x.ImageUrl, opt =>
                     opt.MapFrom(
                         x => x.Images.FirstOrDefault().RemoteImageUrl != null ?

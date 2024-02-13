@@ -30,12 +30,11 @@
 								</a>
 							</h3>
 							<ul class="item-rating">
-								<li class="star-fill"><i class="fas fa-star"></i></li>
-								<li class="star-fill"><i class="fas fa-star"></i></li>
-								<li class="star-fill"><i class="fas fa-star"></i></li>
-								<li class="star-fill"><i class="fas fa-star"></i></li>
-								<li class="star-empty"><i class="fas fa-star"></i></li>
-								<li><span><span> / 10</span></span> </li>
+								@for (int i = 1; i <= 5; i++)
+								{
+									<li class="star-@(i <= recipe.AverageVote ? "fill" : "empty")"><i class="fas fa-star"></i></li>
+								}
+								<li><span><span>@recipe.AverageVote.ToString("0.0") / 5</span></span> </li>
 							</ul>
 							<p>
 								@(recipe.Instructions.Substring(0, 100) + "....")
@@ -78,12 +77,11 @@
 									</a>
 								</h2>
 								<ul class="item-rating">
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-empty"><i class="fas fa-star"></i></li>
-									<li><span>9<span> / 10</span></span> </li>
+									@for (int i = 1; i <= 5; i++)
+									{
+										<li class="star-@(i <= Model.TrendingRecipes[0].AverageVote ? "fill" : "empty")"><i class="fas fa-star"></i></li>
+									}
+									<li><span><span>@Model.TrendingRecipes[0].AverageVote.ToString("0.0") / 5</span></span> </li>
 								</ul>
 								<p>
 									@(Model.TrendingRecipes[0].Instructions.Substring(0, 200) + "....")
@@ -124,12 +122,11 @@
 									</a>
 								</h3>
 								<ul class="item-rating">
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-empty"><i class="fas fa-star"></i></li>
-									<li><span>9<span> / 10</span></span> </li>
+									@for (int i = 1; i <= 5; i++)
+									{
+										<li class="star-@(i <= Model.TrendingRecipes[1].AverageVote ? "fill" : "empty")"><i class="fas fa-star"></i></li>
+									}
+									<li><span><span>@Model.TrendingRecipes[1].AverageVote.ToString("0.0") / 5</span></span> </li>
 								</ul>
 								<p>
 									@(Model.TrendingRecipes[1].Instructions.Substring(0, 200) + "....")
@@ -170,15 +167,14 @@
 									</a>
 								</h3>
 								<ul class="item-rating">
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-fill"><i class="fas fa-star"></i></li>
-									<li class="star-empty"><i class="fas fa-star"></i></li>
-									<li><span>9<span> / 10</span></span> </li>
+									@for (int i = 1; i <= 5; i++)
+									{
+										<li class="star-@(i <= Model.TrendingRecipes[2].AverageVote ? "fill" : "empty")"><i class="fas fa-star"></i></li>
+									}
+									<li><span><span>@Model.TrendingRecipes[2].AverageVote.ToString("0.0") / 5</span></span> </li>
 								</ul>
 								<p>
-									@(Model.TrendingRecipes[1].Instructions.Substring(0, 200) + "....")
+									@(Model.TrendingRecipes[2].Instructions.Substring(0, 200) + "....")
 								</p>
 								<ul class="entry-meta">
 									<li>

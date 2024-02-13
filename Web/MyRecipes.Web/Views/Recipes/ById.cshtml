@@ -20,11 +20,10 @@
 				</li>
 				<li class="single-meta">
 					<ul class="item-rating">
-						<li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
-						<li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
-						<li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
-						<li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
-						<li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
+						@for (int i = 1; i <= 5; i++)
+						{
+							<li class="star-@(i <= Model.AverageVote ? "fill" : "empty")" data-vote="@i"><i class="fas fa-star"></i></li>
+						}
 						<li><span id="averageVoteValue">@Model.AverageVote.ToString("0.0")</span><span> / 5</span> </li>
 					</ul>
 				</li>
@@ -175,6 +174,14 @@
 					},
 					success: function (data) {
 						$('#averageVoteValue').html(data.averageVote.toFixed(1));
+						$("li[data-vote]").each(function () {
+							var vote = parseInt($(this).attr("data-vote"));
+							if (vote <= data.averageVote) {
+								$(this).removeClass("star-empty").addClass("star-fill");
+							} else {
+								$(this).removeClass("star-fill").addClass("star-empty");
+							}
+						});
 					},
 					contentType: 'application/json',
 				});
