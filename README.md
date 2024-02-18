@@ -6,4 +6,4 @@ Still in progress .....
 •	The project is composed of a complex structure including Services, WebAPIs,
 AutoMapper, AJAX, all MVC components, user authentication, roles and Scraper.
 
-•	A system for uploading and saving recipe images locally
+•	System for uploading and saving recipe images locally
