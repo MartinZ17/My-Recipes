@@ -7,3 +7,6 @@ Still in progress .....
 AutoMapper, AJAX, all MVC components, user authentication, roles and Scraper.
 
 •	System for uploading and saving recipe images locally
+
+•	Implemented vote system
+
