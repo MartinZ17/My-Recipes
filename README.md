@@ -1,4 +1,4 @@
-Still in progress .....
+
 
 ## General information
 •	Developed web application for recipes using C#, Entity Framework Core, .NET Core, MS SQL for the back-end and JavaScript, HTML and CSS for the front-end.
