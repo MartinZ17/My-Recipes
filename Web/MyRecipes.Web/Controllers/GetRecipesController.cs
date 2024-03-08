@@ -19,10 +19,5 @@
             return this.View();
         }
 
-        public async Task<IActionResult> Add()
-        {
-            await this.gotvachBgScraperService.ImportRecipesAsync();
-            return this.View("Index", "Home");
-        }
     }
 }
