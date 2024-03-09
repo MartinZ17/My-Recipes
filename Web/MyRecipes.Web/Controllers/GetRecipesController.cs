@@ -7,11 +7,8 @@
 
     public class GetRecipesController : BaseController
     {
-        private readonly IGotvachBgScraperService gotvachBgScraperService;
-
-        public GetRecipesController(IGotvachBgScraperService gotvachBgScraperService)
+        public GetRecipesController()
         {
-            this.gotvachBgScraperService = gotvachBgScraperService;
         }
 
         public IActionResult Index()
